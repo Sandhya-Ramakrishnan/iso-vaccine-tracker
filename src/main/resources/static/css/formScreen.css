@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.containerDiv{
+  /*   width: 100%;
+    height: 100%;
+    background-color:rgb(196, 194, 193) ; */
+    width: 100%;
+    height: 100%;
+    background-color:rgb(196, 194, 193) ;
+   	padding-bottom: 6px;
+    background-image: url('/GT/images/containerbkg.png');
+   /*  background-size: 100% 100%;  */
+   background-size: contain;
+}
+.topspace{
+    height:10%;
+    background-color:rgb(34, 76, 116) ;
+    color:#ffffff;
+    padding: 18px;
+    display: flex;
+}
+
+.logoholder{
+    position: relative;
+    top:2;
+    height: 20px;
+    width: 40px;
+    object-fit: contain;
+}
+
+.rowDiv{
+    display: flex;
+    margin-left:10%;
+    padding-bottom: 3%;
+    margin-right: 10%;
+    height: 100%;
+    width: 80%;
+    margin-top:2%;
+}
+.leftScreen{
+    flex: 50%;
+    background-color:  rgb(200, 249, 255);
+}
+.rightScreen{
+    flex: 50%;
+    background-color: white;
+}
+.form_header{
+   text-align: center;
+   margin-top: 5%;
+}
+.userRow{
+    text-align: left;
+  /*   padding: 9px; */
+  padding: 8px 55px 5px 30px;
+}
+.formhead{
+    margin:5%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.btnSave{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.submit-btn{
+    margin-top: 5%;
+    margin-left:42.5%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+.formRow{
+    display: flex;
+    /* justify-content: space-evenly; */
+    padding: 8px;
+    width:100%;
+}
+.formInpts{
+	border: 1px solid;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.formdisabled{
+	    pointer-events: none;
+	    border: 1px solid #80808080;
+}
+
+.formContainer h4{
+	font-weight: bold;
+    font-size: 15px;
+}
+.topspace h2{
+	font-weight: bold;
+    font-size: 25px;
+}

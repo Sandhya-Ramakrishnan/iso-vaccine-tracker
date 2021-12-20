@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+  
+  <Appenders>
+        <RollingFile name="fileLogger"
+            fileName="E:/Server/logs/vaccine_info/vaccine_info.log"
+            filePattern="E:/Server/logs/vaccine_info/vaccine_info.log-%d{yyyy-MM-dd}.log.gz"
+            ignoreExceptions="false">
+             <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+        
+    </Appenders>
+
+ 
+
+
+    <Loggers>
+        <Logger name="com.tcs.isometrix.GT" level="info"
+            additivity="true">
+            <appender-ref ref="fileLogger" level="info" />
+        </Logger>
+     <!--    <Logger
+            name="org.springframework.web.filter.CommonsRequestLoggingFilter"
+            level="info">
+            <appender-ref ref="fileLogger" level="info" />
+        </Logger> -->
+        <Root level="info" additivity="false">
+            <appender-ref ref="fileLogger" />
+        </Root>
+    </Loggers>
+
+ 
+
+</Configuration>

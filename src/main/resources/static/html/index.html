@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccine Detials</title>
+    <link rel="stylesheet" href="/vaccine_details/css/styles.css">
+    <script src="/vaccine_details/js/jquery3.6.0min.js">
+    </script>
+    <style>
+    
+    #empIdInput::-webkit-inner-spin-button, 
+#empIdInput::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+    
+    #dwnReportID:hover{
+ 	 background: green !important;
+    color:white !important;
+       transition: all 0.5s;
+    }
+    
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id='header'>
+        <h2 class='headerTitle'>Covid Vaccination Drive</h2>
+    </div>
+
+    <!-- Employye Id input -->
+    <div class="idForm">
+        <p>Employee Id :</p>
+        <input type="number" id='empIdInput' >
+        <img src="/vaccine_details/images/arrow.png" onclick='getDetails()'  style="cursor: pointer;" class='arrow-image'>
+    </div>
+
+    <!-- User Details -->
+    <div class="userDetails">
+    </div>
+
+    <!-- Submit -->
+    <div class='submitDiv'>
+        <button id="submit" onclick="saveDetials()" >Submit</button>
+    </div>
+
+<button onclick="{$('#downloadreport').submit()}"  id="dwnReportID" hidden="true">Download Report</button>
+
+<form id="downloadreport" method="post" action="/vaccine_details/downloadreport">
+<input type="hidden" name="empid" value="119060">
+</form>
+
+    <script>
+    
+    $(document).ready(function() {
+    	//  console.log("onload")
+    	  $(".submitDiv").hide()
+    	  $(".userDetails").hide()
+    	  
+    	  $('#empIdInput').keypress(function(e) {
+    		    var key = e.which;
+    		    if (key == 13) // the enter key code
+    		    {
+    		    	 $('#empIdInput').next().click()
+    		      return false;
+    		    }
+    		  });
+    	  
+    	});
+    
+    
+    function getDetails(){
+    	if($("#empIdInput").val().trim()==""){
+    		alert("Employee Id Cannot be Empty")
+    		return
+    	}
+    		
+    		$.ajax(
+    				{
+    					url: "/vaccine_details/getDetails", 
+    					type : "POST",
+    					data : {
+    					 empid:$("#empIdInput").val()
+    					// empid:"1595716"
+    					},
+    					success: function(data)
+    					{
+    						
+    						
+    					//console.log(data)
+    					if(data.length>3 ||data!=""){
+    						var no =data[3]
+        					
+        					
+        					var html=''
+        					
+        					var drp1=""
+        					var drp2=""
+        					
+        				for(var i=0;i<data[3].length;i++){
+        						
+        					//for(var j=0;j<data[3][i].length;j++){
+        							
+        						html+='<div class="userItem" id="'+(i+1)+'prof">'
+        	    					 
+        	    			    html+='<div class="userItemTop"> <p>'+(i+1)+'</p>'
+        	    				 
+        	    				html+='<div class="userItemTopData"><p class="margin-right-text">'+data[0][0][0]+' : </p><p id="nameID">'+data[3][i][0]+' </p><p>  ('+data[3][i][1]+')</p></div></div>'
+        						
+        	    			//	html+=' <div class="userItemTopData"> <p class="margin-right-text">'+data[0][1][0]+' : </p><p>'+data[3][i][1]+'</p></div></div>'
+        	    				//end
+        	    				
+        	    				html+='<div class="userItemBottom">'
+        	    				
+        	    				html+='<div class="userItemBottomItem"><p>'+data[0][2][0]+' : </p><input type="text" id="cowinID" class="userInput" value="'+data[3][i][2]+'"></div>'
+        	    				
+        	   					html+='<div class="userItemBottomItem"><p>'+data[0][3][0]+' : </p><select class="userInputDropDown" id="vaccinNameID">'		
+        	   					
+        	   					html+='<option value data-isdefault="true">--Select--</option>'
+        	   					
+        	   					drp1+=data[3][i][3].trim()+","
+    					    	    
+    					    	for(var m=0;m<data[2].length;m++){
+    					    	
+    					    	    	html+='<option value="'+data[2][m][0]+'">'+data[2][m][0]+'</option>'
+    							}
+        	    
+        	   					html+='</select></div><div class="userItemBottomItem"><p>'+data[0][4][0]+' : </p>'		
+
+        	   					
+        	   				
+        	   					drp2+=data[3][i][4].trim()+","
+        	   					
+        	   					if(drp2.split(",")[i].trim()!=",")html+='<select id="doseID" class="userInputDropDown">'
+        	   					else html+='<select id="doseID" class="userInputDropDown" disabled>'
+        	   					
+        	   					html+='<option value data-isdefault="true">--Select--</option>'
+    				    	    
+    					    	for(var m=0;m<data[1].length;m++){
+    					    	    	html+='<option value="'+data[1][m][0]+'">'+data[1][m][0]+'</option>'
+    							}
+        	   					
+        	   					html+='</select></div><div class="userItemBottomItem"><p>'+data[0][5][0]+' : </p><input type="text" id="venueID" class="userInput"  value="'+data[3][i][5]+'"></div>'
+        	   					
+        	   					
+        	   					
+        	   					var da =data[3][i][6].length>3 ? data[3][i][6].split("/")[2]+"-"+data[3][i][6].split("/")[0]+"-"+ data[3][i][6].split("/")[1]   : " "
+        	   					
+        	   					html+='<div class="userItemBottomItem"><p>'+data[0][6][0]+' : </p><input type="date" id="dateID" class="userInput"  value="'+da+'"></div>'   					 
+        	       					 
+        						html+='</div></div>'
+        	   					
+        						//}
+        						
+        					}
+    						
+        					$(".userDetails").html(html)
+        					 $(".userDetails").show()
+        				//	$("#vaccinNameID").val(drp1.trim())
+        				//	$("#doseID").val(drp2.trim())
+        					
+        					
+        					
+        						drp1.slice(0,-1).split(",").forEach(function(vv,ii){
+        						if(vv!=""){
+        							
+        							switch (ii) {
+          						  case 0:
+          						   $("#1prof #vaccinNameID").val(vv)
+          						 //  $("#1prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case 1:
+          							 $("#2prof #vaccinNameID").val(vv)
+          						//	 $("#2prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case 2:
+          							  $("#3prof #vaccinNameID").val(vv)
+          							//  $("#3prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case 3:
+          							  $("#4prof #vaccinNameID").val(vv)
+          							 // $("#4prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case 4:
+          							  $("#5prof #vaccinNameID").val(vv)
+          							//  $("#5prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case 5:
+          							  $("#6prof #vaccinNameID").val(vv)
+          							//  $("#6prof #vaccinNameID").attr('disabled','true')
+          						    break;
+          						  case  6:
+          							  $("#7prof #vaccinNameID").val(vv)
+          							  //$("#7prof #vaccinNameID").attr('disabled','true')
+          						}
+        							
+        						}
+        					
+        						
+        					})
+        					
+        					drp2.slice(0,-1).split(",").forEach(function(vv,ii){
+        						if(vv!=""){
+        							switch (ii) {
+          						  case 0:
+          						   $("#1prof #doseID").val(vv)
+          						   $("#1prof #doseID").attr('disabled','true')
+          						    break;
+          						  case 1:
+          							 $("#2prof #doseID").val(vv)
+          							 $("#2prof #doseID").attr('disabled','true')
+          						    break;
+          						  case 2:
+          							  $("#3prof #doseID").val(vv)
+          							  $("#3prof #doseID").attr('disabled','true')
+          						    break;
+          						  case 3:
+          							  $("#4prof #doseID").val(vv)
+          							  $("#4prof #doseID").attr('disabled','true')
+          						    break;
+          						  case 4:
+          							  $("#5prof #doseID").val(vv)
+          							  $("#5prof #doseID").attr('disabled','true')
+          						    break;
+          						  case 5:
+          							  $("#6prof #doseID").val(vv)
+          							  $("#6prof #doseID").attr('disabled','true')
+          						    break;
+          						  case  6:
+          							  $("#7prof #doseID").val(vv)
+          							  $("#7prof #doseID").attr('disabled','true')
+          						}
+        							
+        						}
+        					
+        						
+        					})
+        					
+        					
+        					 $(".submitDiv").show()
+    					}
+    					else{
+    						alert("Employee not found")
+    						$(".submitDiv").hide()
+    						
+    							$(".userDetails").html("<h2 style='text-align:center;margin:80px;'>Employee Not Found</h2>")
+    							$(".userDetails").show()
+    					}
+    						
+    					},
+    					error: function(err)
+    					{
+    						alert("sorry error occured");
+    					}
+    				})
+    }
+    
+    
+   function saveDetials(){
+	   if($("#empIdInput").val().trim()==""){
+   		alert("Employee Id Cannot be Empty")
+   		return
+   	}
+	   
+	   var err =false
+	   
+	  var n = $(".userDetails").children().length
+	  var ids=["#nameID","#cowinID","#vaccinNameID","#doseID","#venueID","#dateID"]
+	   var serr=["Name","Covin Benificiary ID","Vaccine Name","Dose","Venue","Date of vaccination"]
+	  
+	   var data=[];
+	  for(var i=0;i<n;i++){
+		  var d=[];
+		  ids.forEach(function(id,l){
+			  var t="#"+(i+1)+"prof  "+id
+			  var res="";
+			  if(l==0){
+				 try{ d.push($(t).text().trim())} catch(errr){d.push("")}
+			  }
+			  else if(l==ids.length-1){
+				  var m =$(t).val().trim()
+				  try{ d.push(m.length>4 ? m.split("-")[1]+"/"+m.split("-")[2]+"/"+m.split('-')[0] : "") } catch(errr){d.push("")}
+			  }
+			  else{ 
+			//	  var t="#"+(i+1)+"prof  "+id
+						 try{ d.push($(t).val().trim())} catch(errr){d.push("")}
+			  }
+			 
+		  });
+		  
+		  
+		 data.push(d)
+		  
+	  }
+	   
+	//   console.log(data)
+	//   console.log(data[0].join("*"))
+	   var db=""
+
+	for(var lp=0;lp<data.length;lp++){
+		   var notSave=false
+		   if(lp==0){
+			   for(var z=0;z<data[lp].length;z++){
+			    	if(data[lp][z].trim()=="") {
+			    		alert(serr[z]+" cannot be empty")
+				    	return true 	
+			    	}
+			    } 
+		   }
+		   else{
+			   for(var z=0;z<data[lp].length;z++){
+			    	if(data[lp][z].trim()=="") {
+			    		
+			    					    		
+			    		notSave=true
+			    		/* if (confirm("Your Benificiary "+$(mnc).text()+"'s information is incomplete, which will not saved")) {
+				 		 return
+						}
+			    		else {
+			    			notSave=true
+							return false
+						} */
+			    		
+			    	}
+			    }  
+		   }
+		   
+		   if(!notSave) db+=data[lp].join(",")+"&"
+		   else{
+			   var mnc= "#"+(lp+1)+"prof  #nameID"
+	    		//console.log(mnc)
+	    		$(mnc).text()
+			  alert("Your Benificiary "+$(mnc).text()+"'s information is incomplete, which will not be saved, in order to succsssfully save complete all the fields below.")
+			 		
+		   }
+		
+		   
+	   }
+	  console.log(db)
+	   
+	   if(!err){
+		   $.ajax(
+   				{
+   					url: "/vaccine_details/saveDetials", 
+   					type : "POST",
+   					data : {
+   					 empid:$("#empIdInput").val(),
+   					// empid:"1595716",
+   					 flag:db.slice(0, -1),
+   					},
+   					success: function(data)
+   					{
+   					console.log(data)
+	   				 if(data.toUpperCase()=="SUCCESS"){
+	 					alert("Vaccination Detials Successfully Saved")
+	 					getDetails();
+	 				 }
+	   				 else{
+	   					 alert("Exception Occured while saving")
+	   				 }
+   						
+   					},
+   					error: function(err)
+   					{
+   						alert("sorry error occured");
+   					}
+   				})
+	   }
+	   
+	   
+	   
+   } 
+    
+   
+  
+    </script>
+    
+    <div style="text-align:center;">
+   <button onclick="{$('#downloadreport').submit()}" id="dwnReportID" style="
+    padding: 10px;
+    background: snow;
+    color: green;
+    font-size: 15px;
+    border: 2px solid green;
+    border-radius: 4px;
+    font-weight: bold;
+">Download Report</button> </div>
+
+<form id="downloadreport" method="post" action="/vaccine_details/downloadreport">
+<input type="hidden" name="empid" value="119060">
+</form>
+    
+</body>
+</html>

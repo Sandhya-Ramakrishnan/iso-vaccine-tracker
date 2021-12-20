@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid Vaccination Drive</title>
+    <link rel="stylesheet" href="/VaccinationTracker/css/form.css">
+    <script src="/VaccinationTracker/js/jquery3.6.0min.js"></script>
+</head>
+<body>
+    <div class="topBanner">
+        <div class="bannertop">
+        </div>
+        <div class="bannerBottom">
+            <h1 id="driveHdr">Velachery - Onsite Vaccination Programme</h1>
+            <div class="bannerDetails">
+                <p id="DateTime">Date : 20.06.2021 | Time : 10 AM to 4 PM</p>
+                <p id="driveLocation">Location : Velachery</p>
+                <p id="vaccineManuf">Type of Vaccine : Covidshield</p>
+            </div>
+            <p class="required">* Required</p>
+        </div>
+    </div>
+    
+    <div class="questionContainer">
+        <p class="questionText">Select the Category <span class="required">*</span></p>
+        <div class="optionsDiv">
+           <div class="radioItem">
+                <input name="typeG" type="radio" value="Others" id="typeGID">
+                <label for="typeGID">Others</label>
+            </div>
+            <div class="radioItem">
+                <input name="typeG" type="radio" value="Tata Group" id="typeGID1">
+                <label for="typeGID1">Tata Group</label>
+            </div>
+            <!--1792910 <div class="radioItem">
+                <input name="typeG" type="radio" value="Retired" id="typeGID2">
+                <label for="typeGID2">Retired</label>
+            </div> -->
+        </div>
+    </div>
+    
+    
+    
+    <!-- <div class="questionContainer">
+        <p class="questionText">Employee Number (For dependents type associate employee Id pls) <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="employeeNumber" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+     -->
+    
+
+    <div class="questionContainer">
+        <p class="questionText">Name as per Aadhar card <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="AadharName" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+    
+
+    <div class="questionContainer">
+        <p class="questionText">Company <span class="required">*</span></p>
+        <div class="optionsDiv" id="companyOps">
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Consultancy Services Limited" id="q1-Option1">
+                <label for="q1-Option1">Tata Consultancy Services Limited</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Motors" id="q1-Option2">
+                <label for="q1-Option2">Tata Motors</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Communications" id="q1-Option3">
+                <label for="q1-Option3">Tata Communications</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Indian Hotels" id="q1-Option4">
+                <label for="q1-Option4">Indian Hotels</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Steels" id="q1-Option5">
+                <label for="q1-Option5">Tata Steels</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Consumer Products" id="q1-Option6">
+                <label for="q1-Option6">Tata Consumer Products</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Titan" id="q1-Option7">
+                <label for="q1-Option7">Titan</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Power" id="q1-Option8">
+                <label for="q1-Option8">Tata Power</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Capital" id="q1-Option9">
+                <label for="q1-Option9">Tata Capital</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Advanced Systems" id="q1-Option10">
+                <label for="q1-Option10">Tata Advanced Systems</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Big Basket" id="q1-Option11">
+                <label for="q1-Option11">Big Basket</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Trent" id="q1-Option12">
+                <label for="q1-Option12">Trent</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tat Ficosa" id="q1-Option13">
+                <label for="q1-Option13">Tat Ficosa</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Strive" id="q1-Option14">
+                <label for="q1-Option14">Tata Strive</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Voltas" id="q1-Option15">
+                <label for="q1-Option15">Voltas</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata AIA" id="q1-Option15">
+                <label for="q1-Option15">Tata AIA</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="IHCL" id="q1-Option15">
+                <label for="q1-Option15">IHCL</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata SIA Airlines" id="q1-Option15">
+                <label for="q1-Option15">Tata SIA Airlines</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Realty" id="q1-Option15">
+                <label for="q1-Option15">Tata Realty</label>
+            </div>
+            <!--1792910 <div class="radioItem">
+                <input name="company" type="radio" value="other" id="q1-Option16">
+                <label for="q1-Option16">Other</label>
+                <input type="text" class="input-text" id="ocompany" placeholder="Enter Company Name">
+            </div> -->
+        </div>
+    </div>
+ <div class="questionContainer">
+        <p class="questionText">Previous dosage date <span ></span></p>
+        <p class="questionHint">In case of dose 2 date of first vaccination is to be entered</p>
+        <div class="optionsDiv">
+            <input type="date" id="previousDose" class="input-text" placeholder="DD/MM/YY">
+        </div>
+    </div>
+	
+	 <div class="questionContainer">
+        <p class="questionText">Vaccine Type <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <select  id="vaccineType" name="hisrel" class="input-text">
+                <option value data-isdefault="true">--Select--</option>
+                <option value="covisheild">Covisheild</option>
+                <option value="covaxin">Covaxin</option>
+            </select>
+        </div>
+    </div>
+	
+	
+    
+    <div class="questionContainer">
+        <p class="questionText">Dose Type <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="doseType" type="radio" value="First" id="q10-Option1">
+                <label for="q10-Option1">First</label>
+            </div>
+            <div class="radioItem">
+                <input name="doseType" type="radio" value="Second" id="q10-Option2">
+                <label for="q10-Option2">Second</label>
+            </div>
+        </div>
+    </div>
+    
+    
+      <div class="questionContainer">
+        <p class="questionText">HIS Relationship <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <select  id="relationship" name="hisrel" class="input-text">
+                <option value data-isdefault="true">--Select--</option>
+                <option value="Self">Self</option>
+                <option value="Spouse">Spouse</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Father in law">Father in law</option>
+                <option value="Mother in law">Mother in law</option>
+                <option value="First Child">First Child</option>
+                <option value="Second Child">Second Child</option>
+                <option value="Third Child">Third Child</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="questionContainer">
+        <p class="questionText">Age <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="age" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+    
+    
+    <div class="questionContainer">
+        <p class="questionText">COWIN Registered Mobile number <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="tel" id="mobileNo" maxlength="10" class="input-text" title="Invalid Number" pattern="[5-9]{1}[0-9]{9}" placeholder="Your Answer">
+            
+              <!--  <input type="text" name="country_code" title="Invalid Number" pattern="[5-9]{1}[0-9]{9}" maxlength="10">  -->
+        </div>
+    </div>
+
+	 <div class="questionContainer">
+        <p class="questionText">Cowin Beneficiary ID<span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="cowinId" class="input-text" maxlength="14" placeholder="Your Answer" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+        </div>
+    </div>
+
+    <div class="btnDiv">
+        <button id="submit" onclick="submission()">Submit</button>
+    </div>
+
+</body>
+<script>
+$(document).ready(function() {
+	getDriveDetails();
+	getFormFields();
+	$('input[name="typeG"]').prop('checked',false)
+	$('input[name="typeG"]').on('change',(e)=>{
+		console.log(e.target.value)
+		console.log($(e))
+		/* if(e.target.value=="Others" || e.target.value=="Retired"){
+			var t =$("#employeeNumber").parents()[1]
+			$(t).hide()
+		}
+		else */
+		if(e.target.value=="Others"){	
+			/* $("#q1-Option19").prop("checked",true)
+			$("#q1-Option19").show()
+			$("#label19").show() */
+			$(".radioItem").hide()
+			$("#typeGID").parent().show()
+			$("#typeGID1").parent().show()
+			$("#q10-Option1").parent().show()
+			$("#q10-Option2").parent().show()
+			$("#labelvendor").parent().show()			
+			/* $("#q1-opsvendor").show()
+			$("#labelvendor").show() */
+			$("#q1-opsvendor").prop("checked",true)
+			/* $("#q1-opsothers").hide()
+			$("#labelothers").hide()
+			$("#ocompany").hide() */
+		}
+		else if(e.target.value=="Tata Group"){	
+			/* $("#q1-Option19").hide()
+			$("#label19").hide() */
+			$(".radioItem").show()
+			$("#labelvendor").parent().hide()	
+			/* $("#q1-opsvendor").hide()
+			$("#labelvendor").hide()
+			$("#q1-opsothers").show()
+			$("#labelothers").show()
+			$("#ocompany").show() */
+		}
+		/* else{
+			var t=$("#employeeNumber").parents()[1]
+			$(t).show()
+		} */
+	})
+	});
+	
+	
+function testInput(val) {
+		var format = /[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/;
+	   	return format.test(value);
+	}		
+	
+function getDriveDetails(){
+	$.ajax(
+			{
+				url: "/VaccinationTracker/getDriveDetails", 
+				type : "POST",
+				data : {
+				 empid:"1595716",
+				},
+				success: function(data)
+				{
+					console.log(data)
+					
+					if(data!=""){
+						$("#driveHdr").text(data[0][0][0].trim())
+						$("#DateTime").text('Date : '+data[1][0][0].trim()+' | Time : '+data[2][0][0].trim()+'')
+						$("#driveLocation").text('Location : '+data[3][0][0].trim()+'')
+						$("#vaccineManuf").text('Type of Vaccine : '+data[4][0][0].trim()+'')
+					}
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})	
+}
+
+function getFormFields(){
+	var companylength=0;
+	$.ajax(
+			{
+				url: "/VaccinationTracker/getFormFields", 
+				type : "POST",
+				data : {
+				 empid:"",
+				},
+				success: function(data)
+				{
+					companylength=data[0].length
+					console.log(data)
+					console.log(length)
+					if(data!=""){
+						
+						//companyOps
+						var html=''
+						for(var i=0;i<data[0].length;i++){
+							html+='<div class="radioItem">'
+							html+=' <input name="company" type="radio" value="'+data[0][i][0]+'" id="q1-Option'+i+'">'
+			                html+='<label for="q1-Option1'+i+'" id="label'+i+'">'+data[0][i][0]+'</label></div>'
+						}
+						html+='<div class="radioItem">'
+						html+='<input name="company" type="radio" value="Vendor" id="q1-opsvendor">'
+				        html+='<label id="labelvendor" for="q1-opsvendor">Vendor</label> </div>'
+				      
+						/* html+='<div class="radioItem">'
+					  	html+='<input name="company" type="radio" value="other" id="q1-opsothers">'
+			            html+='<label id="labelothers" for="q1-opsothers">Other</label>'
+			            html+='<input type="text" class="input-text" id="ocompany" placeholder="Enter Company Name"> </div>'
+			            */
+						$("#companyOps").html(html)
+					}
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})	
+		
+}
+
+function submission(){
+	var arr =[]
+	
+	
+	var typ =$('input[name="typeG"]:checked').val()
+	if(typ==undefined || typ==""){alert('Select Type to Proceed');return} 
+	
+	/*1792910 var empNo =$('#employeeNumber').val()
+	if($('input[name="typeG"]:checked').val()=="Tata Group"){
+		if(empNo==""){alert('Enter the Employee Number to Proceed'); return }
+	}
+	//if(empNo==""){alert('Enter the Employee Number to Proceed'); return }
+	arr.push(empNo)
+	 */
+	
+	
+	var adName =$('#AadharName').val()
+	if(adName==""){alert('Enter the Name to Proceed'); return }
+	arr.push(adName)
+	//var format = /[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/;
+	var format = /[a-zA-Z]$/;
+	if(!format.test(adName.trim())){
+		
+		alert('Name Cannot have Numbers or Special Characters'); 
+		$('html, body').animate({
+            scrollTop: $("#AadharName").offset().top
+      }, 500); 
+		 $("#AadharName").focus();
+		return 
+	}
+	
+	
+	var company =$('input[name="company"]:checked').val()
+	if(company=="" || company==undefined){alert('Select the Company to Proceed'); return }
+	else {
+		if(company=="other"){
+			var rea =$('#ocompany').val()
+			if(rea ==""){alert ("Company Name cannot be empty in other"); return}
+			else 	arr.push(rea)
+			
+		}
+		else{
+			arr.push(company)
+		}
+	}
+	
+	
+	var vaccinetype =$("#vaccineType").val().trim()
+	if(vaccinetype=="" || vaccinetype==undefined){alert('Select the Vaccine Type to Proceed'); return }
+	arr.push(vaccinetype)
+	
+	var dosetype =$('input[name="doseType"]:checked').val().trim()
+	if(dosetype=="" || dosetype==undefined){alert('Select the Dose Type to Proceed'); return }
+	arr.push(dosetype)
+	
+	var hisrel =$("#relationship").val().trim()
+	if(hisrel=="" || hisrel==undefined){alert('Select the HIS Relationship to Proceed'); return }
+	arr.push(hisrel)
+
+
+	
+	var age =$('#age').val().trim()
+	if(age==""){alert('Entered the Age to Proceed'); return }
+	arr.push(age)
+	
+	
+	
+	var mobN =$('#mobileNo').val()
+	if(mobN==""){alert('Enter the Mobile Number to Proceed'); return }
+	else{
+		var regx = /^[6-9]\d{9}$/ ;
+		if(!regx.test(mobN)) {
+			alert("Invalid Phone Number")
+			return;
+		}else{
+			arr.push(mobN);
+		}
+		
+	}
+	var previousDosage = $("#previousDose").val();
+	if(dosetype=="Second"){
+		if(previousDosage==""){alert('Select Previous Dosage Date to Proceed'); return }
+	}
+	if(previousDosage!=undefined && previousDosage!=null){
+		previousDosage=formatDate(previousDosage);
+	}
+	arr.push(previousDosage);
+	
+	//cowinId
+	var cowi =$('#cowinId').val().trim()
+	if(cowi==""){alert('Entered the Cowin Beneficiary ID to Proceed'); return }
+	arr.push(cowi)
+	
+	console.log(arr)
+	console.log(arr.join())
+	
+		$.ajax(
+			{
+				url: "/VaccinationTracker/formSubmit", 
+				type : "POST",
+				data : {
+				 empid:null,
+				 input:arr.join("^")
+				},
+				success: function(data)
+				{
+					console.log(data)
+					if(data=="no") {
+						alert("You have already submitted your response")
+						}
+					else {
+						alert("Form successfully submitted")
+						location.reload();	
+					}
+					
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})	
+	
+}
+
+
+function formatDate(e){
+	var month=[];
+	var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	];
+	if(e.includes("-")){
+		var e =e.split("-")
+		if(e.length<=1) return ""
+		else{
+			var day=Number(e[2]);
+			var mon=Number(e[1])-1;
+		var temp = day < 10 ? ("0" + (day)) : day;
+		var month = monthNames[mon];
+		var year = e[0];
+		
+		//return e[1]+"/"+e[2]+"/"+e[0]
+		return temp+"-"+month+"-"+year;
+		}
+	}
+	else return ""
+	
+	
+}
+
+</script>
+</html>

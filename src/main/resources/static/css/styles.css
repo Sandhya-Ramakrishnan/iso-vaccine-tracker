@@ -1,0 +1,213 @@
+:root {
+    --tcsBlue: #1169C3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #e0e0e0;
+}
+
+#header {
+    background-color: var(--tcsBlue);
+    padding: 1.2rem 3rem;
+}
+
+.headerTitle {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.idForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+
+.idForm p {
+    margin-right: 1.5rem;
+    font-size: 1rem;
+}
+
+#empIdInput {
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--tcsBlue);
+}
+
+/* User detail */
+.userDetails {
+    margin-top: 1rem;
+    background-color: #fff;
+    width: 60%;
+    margin: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.userItem {
+    margin-bottom: 1rem;
+    width: 60%;
+    border-bottom: 1.5px solid var(--tcsBlue);
+    padding-bottom: 1rem;
+}
+
+.userItemTop {
+    padding: 0.7rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.userItemTop > * {
+    margin: 0 0.5rem;
+}
+
+.userItemTopData {
+    display: flex;
+}
+
+.userItemTop p {
+    color: #5B64C8;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.margin-right-text {
+    margin-right: 0.3rem;
+}
+
+.userItemBottom {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.userItemBottomItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    align-items: center;
+}
+
+.userItemBottomItem p {
+    margin-right: 0.4rem;
+    font-size: 0.95rem;
+}
+
+.userInput {
+    outline: none;
+    border: 1px solid var(--tcsBlue);
+    padding: 0.3rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    background-color: #e7e7e7;
+    min-width: 12rem;
+}
+
+.userInputDropDown {
+    outline: none;
+    border: 1px solid var(--tcsBlue);
+    padding: 0.3rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    min-width: 12rem;
+    background-color: #e7e7e7;
+}
+
+.date-image {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 0.3rem;
+}
+
+.arrow-image {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+.arrow-image:hover {
+    transform: scale(1.1);
+}
+
+#submit {
+    padding: 0.5rem 2rem;
+    outline: none;
+    border: none;
+    background-color: rgb(30, 165, 18);
+    color: #fff;
+    border-radius: 15px;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+#submit:hover {
+    background-color: rgb(39, 184, 26);
+    transform: scale(1.01);
+}
+
+.submitDiv {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0 3rem 0;
+}
+
+
+@media only screen and (max-width: 1366px) {
+    .userDetails {
+        width: 60%;
+    }
+
+    .userItem {
+        width: 60%;
+    }
+}
+
+/* @media only screen and (max-width: 1200px) {
+    .userDetails {
+        width: 80%;
+    }
+
+    .userItem {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .userInput, .userInputDropDown {
+        max-width: 12rem;
+    }
+}
+
+*/
+
+@media only screen and (max-width: 900px) {
+    .userDetails {
+        width: 90%;
+    }
+
+    .userItem {
+        width: 90%;
+    }
+
+    .userInput {
+        width: 10rem;
+    }
+    
+    .userInputDropDown {
+        width: 10rem;
+    }
+} 

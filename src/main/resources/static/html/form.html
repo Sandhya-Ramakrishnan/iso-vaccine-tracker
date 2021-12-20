@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid Vaccination Drive</title>
+    <link rel="stylesheet" href="/VaccinationTracker/css/form.css">
+    <script src="/VaccinationTracker/js/jquery3.6.0min.js"></script>
+</head>
+<body>
+   <!--  <div class="topBanner">
+        <div class="bannertop">
+        </div>
+        <div class="bannerBottom">
+            <h1 id="driveHdr">Velachery - Onsite Vaccination Programme</h1>
+            <div class="bannerDetails">
+                <p id="DateTime">Date : 20.06.2021 | Time : 10 AM to 4 PM</p>
+                <p id="driveLocation">Location : Velachery</p>
+                <p id="vaccineManuf">Type of Vaccine : Covidshield</p>
+            </div>
+            <p class="required">* Required</p>
+        </div>
+    </div> -->
+
+    <div class="questionContainer">
+        <p class="questionText">Company <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Communications" id="q1-Option1">
+                <label for="q1-Option1">Tata Consultancy Services Limited</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Motors" id="q1-Option2">
+                <label for="q1-Option2">Tata Motors</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Steel" id="q1-Option3">
+                <label for="q1-Option3">Tata Communications</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Chemicals" id="q1-Option4">
+                <label for="q1-Option4">Indian Hotels</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Consumer Products" id="q1-Option5">
+                <label for="q1-Option5">Tata Steels</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Titan" id="q1-Option6">
+                <label for="q1-Option6">Tata Consumer Products</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Power" id="q1-Option7">
+                <label for="q1-Option7">Titan</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Capital" id="q1-Option8">
+                <label for="q1-Option8">Tata Power</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Tata Advanced systems" id="q1-Option9">
+                <label for="q1-Option9">Tata Capital</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="Indian Hotels" id="q1-Option10">
+                <label for="q1-Option10">Tata Advanced Systems</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="TCS" id="q1-Option11">
+                <label for="q1-Option11">Big Basket</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="TCS" id="q1-Option12">
+                <label for="q1-Option12">Trent</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="TCS" id="q1-Option13">
+                <label for="q1-Option13">Tat Ficosa</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="TCS" id="q1-Option14">
+                <label for="q1-Option14">Tata Strive</label>
+            </div>
+            <div class="radioItem">
+                <input name="company" type="radio" value="TCS" id="q1-Option15">
+                <label for="q1-Option15">Voltas</label>
+            </div>
+           <!--1792910  <div class="radioItem">
+                <input name="company" type="radio" value="other" id="q1-Option16">
+                <label for="q1-Option16">Other</label>
+                <input type="text" class="input-text" placeholder="">
+            </div> -->
+        </div>
+    </div>
+
+    <!--1792910 <div class="questionContainer">
+        <p class="questionText">Employee Number (For dependents type associate employee Id pls) <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="employeeNumber" class="input-text" placeholder="Your Answer">
+        </div>
+    </div> -->
+    
+    
+    <div class="questionContainer">
+        <p class="questionText">GESS Registeration Id <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="gessID" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+    
+
+    <div class="questionContainer">
+        <p class="questionText">Title <span></span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="title" type="radio" value="Mr" id="q2-Option1">
+                <label for="q2-Option1">Mr</label>
+            </div>
+            <div class="radioItem">
+                <input name="title" type="radio" value="Ms" id="q2-Option2">
+                <label for="q2-Option2">Ms</label>
+            </div>
+            <div class="radioItem">
+                <input name="title" type="radio" value="Mrs" id="q2-Option3">
+                <label for="q2-Option3">Mrs</label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Name as per Aadhar card <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="AadharName" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Gender <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="gender" type="radio" value="Female" id="q5-Option1">
+                <label for="q5-Option1">Female</label>
+            </div>
+            <div class="radioItem">
+                <input name="gender" type="radio" value="Male" id="q5-Option2">
+                <label for="q5-Option2">Male</label>
+            </div>
+            <div class="radioItem">
+                <input name="gender" type="radio" value="other" id="q5-Option3">
+                <label for="q5-Option3">Other</label>
+                <input type="text" class="input-text" placeholder="">
+            </div>
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">COWIN Registered Mobile number <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="mobileNo" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Date of birth <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="dateItem">
+                <input type="date" id="dob" >
+            </div>
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Age <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="age" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">COWIN Registered ID proof <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="Aadhar Card" id="q9-Option1">
+                <label for="q9-Option1">Aadhar Card</label>
+            </div>
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="PAN Card" id="q9-Option2">
+                <label for="q9-Option2">PAN Card</label>
+            </div>
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="Driving license" id="q9-Option3">
+                <label for="q9-Option3">Driving license</label>
+            </div>
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="Passport" id="q9-Option4">
+                <label for="q9-Option4">Passport</label>
+            </div>
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="Pension book" id="q9-Option5">
+                <label for="q9-Option5">Pension book</label>
+            </div>
+            <div class="radioItem">
+                <input name="idproof" type="radio" value="NPR smart card" id="q9-Option6">
+                <label for="q9-Option6">NPR smart card</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">ID Proof number <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <input type="text" id="idProofNo"class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">COWIN beneficiary ID <span class="required">*</span></p>
+        <p class="questionHint">This needs to be generated from the COWIN portal (<a href="https://www.cowin.gov.in" target="_blank" rel="noopener noreferrer">https://www.cowin.gov.in</a>) or the mobile application</p>
+        <div class="optionsDiv">
+            <input type="text" id="cowinID" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">HIS Relationship <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <select  id="relationship" name="hisrel" class="input-text">
+                <option value data-isdefault="true">--Select--</option>
+                <option value="Self">Self</option>
+                <option value="Spouse">Spouse</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Father in law">Father in law</option>
+                <option value="Mother in law">Mother in law</option>
+                <option value="First Child">First Child</option>
+                <option value="Second Child">Second Child</option>
+                <option value="Third Child">Third Child</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Dose Type <span class="required">*</span></p>
+        <div class="optionsDiv">
+            <div class="radioItem">
+                <input name="doseType" type="radio" value="First" id="q10-Option1">
+                <label for="q10-Option1">First</label>
+            </div>
+            <div class="radioItem">
+                <input name="doseType" type="radio" value="Second" id="q10-Option2">
+                <label for="q10-Option2">Second</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="questionContainer">
+        <p class="questionText">Previous dosage date <span ></span></p>
+        <p class="questionHint">In case of dose 2 date of first vaccination is to be entered</p>
+        <div class="optionsDiv">
+            <input type="text" id="previousDose" class="input-text" placeholder="Your Answer">
+        </div>
+    </div>
+
+    <div class="btnDiv">
+        <button id="submit" onclick="submission()">Submit</button>
+    </div>
+
+</body>
+<script>
+$(document).ready(function() {
+	
+	});
+	
+function getDriveDetails(){
+	$.ajax(
+			{
+				url: "/VaccinationTracker/getDriveDetails", 
+				type : "POST",
+				data : {
+				 empid:"1595716",
+				},
+				success: function(data)
+				{
+					console.log(data)
+					
+					if(data!=""){
+						$("#driveHdr").text(data[0][0][0].trim())
+						$("#DateTime").text('Date : '+data[1][0][0].trim()+' | Time : '+data[2][0][0].trim()+'')
+						$("#driveLocation").text('Location : '+data[3][0][0].trim()+'')
+						$("#vaccineManuf").text('Type of Vaccine : '+data[4][0][0].trim()+'')
+					}
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})	
+}
+
+function submission(){
+	var arr =[]
+	var company =$('input[name="company"]:checked').val()
+	if(company=="" || company==undefined){alert('Select the Company to Proceed'); return }
+	else {
+		if(company=="other"){
+			var rea =$('input[name="company"]').find('input').val()
+			if(rea ==""){alert ("Specify the other in Gender")}
+			else 	arr.push(rea)
+			
+		}
+		else{
+			arr.push(company)
+		}
+	}
+	
+	/* 1792910 var empNo =$('#employeeNumber').val()
+	//if(empNo==""){alert('Enter the Employee Number to Proceed'); return }
+	arr.push(empNo)
+	 */
+	
+	var gs =$('#gessID').val()
+	if(gs==""){alert('Enter the GESS Registeration ID to Proceed'); return }
+	arr.push(gs)
+	
+	
+	
+	
+	var title =$('input[name="title"]:checked').val()
+	if(title=="" || title==undefined){arr.push("")}
+	else arr.push(title)
+	
+	
+	var adName =$('#AadharName').val()
+	if(adName==""){alert('Enter the Aadhar Name to Proceed'); return }
+	arr.push(adName)
+	
+	
+	var gen =$('input[name="gender"]:checked').val()
+	if(gen=="" || gen==undefined){alert('Select the Gender to Proceed'); return }
+	else{
+		
+		if(gen=="Other"){
+			var rea =$('input[name="gender"]').find('input').val()
+			if(rea ==""){alert ("Specify the other in Gender")}
+			else 	arr.push(rea)
+			
+		}
+		else{
+			arr.push(gen)
+		}
+	}
+	
+	
+	
+	var mobN =$('#mobileNo').val()
+	if(mobN==""){alert('Enter the Mobile Number to Proceed'); return }
+	arr.push(mobN)
+	
+	var dob =$('#dob').val()
+	if(dob==""){alert('Select the Date of Birth to Proceed'); return }
+	arr.push(formatDate(dob))
+
+	var age =$('#age').val()
+	if(age==""){alert('Entered the Age to Proceed'); return }
+	arr.push(age)
+	
+	var rproof =$('input[name="idproof"]:checked').val()
+	if(rproof=="" || rproof==undefined){alert('Select the COWIN Registered ID proof to Proceed'); return }
+	arr.push(rproof)
+
+	var idProofNo =$('#idProofNo').val()
+	if(idProofNo==""){alert('Enter the ID Proof Number to Proceed'); return }
+	arr.push(idProofNo)
+	
+	var cowinID =$('#cowinID').val()
+	if(cowinID==""){alert('Enter the Cowin beneficiary ID to Proceed'); return }
+	arr.push(cowinID)
+
+	var hisrel =$("#relationship").val()
+	if(hisrel=="" || hisrel==undefined){alert('Select the HIS Relationship to Proceed'); return }
+	arr.push(hisrel)
+
+	var dosetype =$('input[name="doseType"]:checked').val()
+	if(dosetype=="" || dosetype==undefined){alert('Select the Dose Type to Proceed'); return }
+	arr.push(dosetype)
+	
+	var prevDoseDet =$("#previousDose").val().trim()
+	arr.push(prevDoseDet)
+	
+	console.log(arr)
+	console.log(arr.join())
+	
+	
+		$.ajax(
+			{
+				url: "/VaccinationTracker/formSubmit", 
+				type : "POST",
+				data : {
+				 empid:"1595716",
+				 input:arr.join()
+				},
+				success: function(data)
+				{
+					console.log(data)
+					if(data=="no") alert("You have already submitted your response")
+					else alert("Form successfully submitted")
+					
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})	
+	
+}
+
+
+function formatDate(e){
+	if(e.includes("-")){
+		var e =e.split("-")
+		if(e.length<=1) return ""
+		else return e[2]+"/"+e[1]+"/"+e[0]	
+	}
+	else return ""
+	
+}
+
+</script>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Tracker</title>
+    <link rel="stylesheet" href="/VaccinationTracker/css/fontawesomeweb5.15.css">
+     <link rel="stylesheet" href="/VaccinationTracker/css/homepage.css">
+    <script src="/VaccinationTracker/js/jquery3.6.0min.js">
+    </script>
+    <style>
+     #dwnReportID:hover{
+ 	 background: green !important;
+    color:white !important;
+       transition: all 0.5s;
+    }
+    </style>
+</head>
+<body>
+
+	<div class="loading-screen" style="display:none;">
+		<div class="loading">
+			<span></span> <span></span> <span></span> <span></span>
+		</div>
+	</div>
+
+
+	<div id="snackbar"></div>
+
+	<div class="header">
+        <h2 class='headerTitle'>Covid Vaccination Drive</h2>
+    </div>
+
+
+ 
+ 
+   <!-- Modal -->
+    <div class="modalSec">
+        <div class="modalInner">
+            <h3 class="modalTitle">Covid Vaccination Drive - <span id="date"></span></h3>
+            <div class="modalInputs">
+             <div class="modalItem">
+                    <p>Employee ID</p>
+                    <input type="text" id="empid">
+                </div>
+                <div class="modalItem">
+                    <p>Country</p>
+                    <select id="country">
+                    
+                    </select>
+                </div>
+                <div class="modalItem">
+                    <p>State</p>
+                    <select id="state">
+                    
+                    </select>
+                </div> 
+                <div class="modalItem">
+                    <p>Location</p>
+                    <select id="location">
+                    
+                    </select>
+                </div>
+                 <div class="modalItem">
+                    <p>Hospital</p>
+                    <select id="hospital">
+                    
+                    </select>
+                </div>
+            </div>
+            <button class="button-primary" onclick="checkEmp()" id="checkEmp">Continue</button>
+        </div>
+    </div>
+ 
+ 
+ 
+ <div class="content">
+
+        <!-- Emp Id Search Input -->
+        <div class="idForm">
+            <div class="idFormInputDiv">
+           		<div class="idInpputDiv">
+	                <input type="text" id='empIdInput' style="height:44px;"placeholder="Search">
+	                <!-- Delete icon -->
+	                <i class="fas fa-times-circle" id="empIdClear"></i>
+           		</div>
+           		<!-- <div class="idSearchDiv" onclick="getTokenScrn()"> -->
+					
+					<div class="catgContainer">
+						<div class="mainCatg">
+									<select name="" id="srchFlag">
+										
+									</select>
+						</div>
+					</div>
+
+
+           	</div>
+            <div id="idFormButtons" class="idFormBottom">
+	            <!-- <button class="button-primary" id="empIdSearch" onclick="getTokenScrn()"><i class="fas fa-search"></i></button> -->
+				<button class="generateTokenSearch" id="geratetknSearchID" onclick="getTokenScrn('')"  style="margin-right: 2px;">
+					Verification
+				</button>
+				<button class="generateTokenSearch" id="submissionSearchID" onclick="getSubmissionScr()" style="margin-right: 2px;">
+					Update Status
+				</button>
+				
+				<button class="generateTokenSearch" id="getReportScrID" onclick="getReportsTab()">
+					Reports
+				</button>
+				
+				<button class="generateTokenSearch" id="getVendorScrID" onclick="getVendorForm()">
+					Add Vendor
+				</button>
+				<button class="generateTokenSearch" id="getDashboardScrID" onclick="getDashboardTab()">
+					Dashboard
+				</button>
+				
+            </div>
+		</div>
+        
+        
+        <div id="userDetailSelf"> 
+        
+        <div class="userCardContainer"></div>
+
+		
+
+	</div>
+        
+        
+        <div class="userdetailsBox" style="display:none;">
+        
+        	<div class="processesDiv">
+	
+			</div>	
+        
+        
+        <div class="userDetailConDIv">
+        
+            <div class="userdetailsBoxLeft">
+               
+            </div>
+            <div class="userdetailsBoxRight">
+               
+            </div>
+            
+         </div>   
+        </div>
+
+
+		<div class="reportsDIv" style="display: none;">
+
+
+			<div class="card"
+				style="display: flex; flex-direction: column; margin-bottom: 20px; padding: 10px; border: 1px solid #e8e7ec; box-shadow: 4px 3px #dcdfe0; border-radius: 5px; margin-top: 10px; padding: 10px; margin-bottom: 20px">
+				<div class="content" style="display: flex;width:auto;">
+					<div
+						style="display: flex; align-items: center; margin-left: -60px;">
+						<span class="spanTag">From Date : </span><input id="trackerDate"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+					<div
+						style="display: flex; align-items: center; margin-left: 150px;">
+						<span class="spanTag">To Date : </span><input id="trackerDate1"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+				</div>
+				<div style="display: flex;justify-content: center;">
+					<div onclick="CVCDownload()">
+						<img src="/VaccinationTracker/images/download1.png"
+							style="cursor: pointer; width: 40px;; margin-left: 30px">
+						<div style="margin-top: 10px">CVC Report</div>
+					</div>
+					<div onclick="reconDownload()" style="margin-left: 120px;">
+						<img src='/VaccinationTracker/images/download1.png'
+							style="width: 40px; cursor: pointer; margin-left: 30px">
+						<div style="margin-top: 10px">Recon Report</div>
+					</div>
+					<div onclick="downloadReport()" style="margin-left: 120px;">
+						<img src='/VaccinationTracker/images/download1.png'
+							style="width: 40px; cursor: pointer; margin-left: 30px">
+						<div style="margin-top: 10px">Live Vaccination Report</div>
+					</div>
+					
+				</div>
+
+
+			</div>
+			<!-- <div id="trendchart" class="trendchart">
+			<div
+						style="display: flex; align-items: center; margin-left: -60px;">
+						<span class="spanTag"> Date : </span><input id="trendDate"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+			<div id="chartdiv"></div>
+			</div> -->
+
+		</div>
+
+
+		<div class="addVendorDIv"
+			style="display: none;">
+		</div>
+	
+		<div class="turnoutDashboardDiv" style="display: none;" >
+		
+		<div class="button-wrapper">
+<button  class="btn-select" id="grid" onclick="showGridTrend('grid')" > Grid </button>
+<button  class="btn-remove" id="trend" onclick="showGridTrend('trend')" > Trend </button>
+</div>
+		
+		<div class="turnout" style="display:none;">
+		<div style="display: flex;justify-content: center;">
+		<div class="card"
+				style="display: flex;white-space:nowrap; margin-bottom: 20px; padding: 10px; margin-top: 10px; padding: 10px; margin-bottom: 10px">
+				
+	 	<div class="" style="display: flex;width:auto;">
+		<div onclick="openuploadmodal()">
+						<img src="/VaccinationTracker/images/upload.png"
+							style="cursor: pointer; width: 40px; margin-left: 30px">
+						<div style="margin-top: 10px">Upload Schedule</div>
+					</div>
+					
+					<div
+						style="display: flex; align-items: center; margin-left: 10px;">
+						<span class="spanTag">From : </span><input id="turnoutDate"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+					<div
+						style="display: flex; align-items: center; margin-left: 10px;">
+						<span class="spanTag">To : </span><input id="turnoutDate1"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+					<div onclick="getgridData()">
+						<img src="/VaccinationTracker/images/grid.png"
+							style="cursor: pointer; width: 40px; margin-left: 30px">
+						<div style="margin-top: 10px; margin-left: 30px">Turnout</div>
+					</div>
+		
+		<div onclick="downloadturnout()" style="margin-left: 10px;">
+						<img src='/VaccinationTracker/images/download1.png'
+							style="width: 40px; cursor: pointer; margin-left: 10px">
+						<div style="margin-top: 10px;margin-left: 10px">Download </div>
+					</div>
+		</div>
+		</div>
+ </div>
+ 
+ <input id="searchinput" name="searchbox" type="text" placeholder="Search" onchange=onchangeSearch()>
+ <div class="tableDiv">
+ <div class="tablesection">
+ <table id="turnouttable" class="gridData">
+ <thead id="tablehead"> </thead>
+ <tbody id="tablebody" class="tablebody"> </tbody>
+  </table>
+ </div>
+ </div>
+ 
+ </div>
+ <div class="trend" style="display:none;">
+ <div class="content" style="display: flex;width:auto;justify-content: center">
+					<div
+						style="display: flex; ">
+						<span class="spanTag">From Date : </span><input id="trendDate"
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+					<div 
+						style="display: flex;  margin-left: 10px;">
+						<span class="spanTag">To Date : </span><input id="trendDate1" 
+							style="height: 27px; border-radius: 7px; border: 1.5px solid black; margin-left: 10px; outline: none;"
+							type="date" />
+					</div>
+					<div onclick="downloadtrend()" style="margin-left: 10px;">
+						<img src='/VaccinationTracker/images/download1.png'
+							style="width: 40px; cursor: pointer; margin-left: 10px">
+						<div style="margin-top: 10px;margin-left: 10px">Download </div>
+					</div>
+				</div>
+ <div class="button-wrapper1">
+<button  class="btn-select1" id="chennai" onclick=" showlocationtrend('Chennai')" > Chennai </button>
+<button  class="btn-remove1" id="non" onclick=" showlocationtrend('Other_location')" > Other_location </button>
+</div>
+ <div id="chartdiv"></div>
+ </div>
+ 
+</div>
+		<div class="btnDiv" id="submissionCtrlID" style="display:none;">
+			<!-- <button class="button-secondary" id="cancelEntry">Cancel</button> -->
+			<button class="button-primary" id="submitDetails" onclick="finalSubmission()">Submit</button>
+		</div>
+        
+        
+        <div class="btnDiv" >
+         <!--    <button class="button-primary" id="addDepentID" onclick="showAddUser('d')">Add Dependent</button> -->
+            <button class="button-primary" id="generateToken" onclick="generateToken()">GENERATE TOKEN</button>
+            <!-- <button class="button-primary" id="addVendrBtnID" onclick="saveVendor()">Add Vendor</button> -->
+           <!--  <div class="processBtnDIv">
+            </div> -->
+           
+        </div>
+        
+    </div>
+    
+    
+    
+  <!--  <div class="submissionContent subcontent content-entryPage" style="display:none;">
+   
+   
+    <div class="userdetailsBox">
+            <div class="userdetailsBoxLeft">
+               
+            </div>
+            <div class="userdetailsBoxRight">
+               
+            </div>
+        </div>
+
+
+		<div class="btnDiv" id="submissionCtrlID">
+			<button class="button-secondary" id="cancelEntry">Cancel</button>
+			<button class="button-primary" id="submitDetails" onclick="finalSubmission()">Submit</button>
+		</div>
+
+	</div>  -->
+	
+	
+	
+	<div class="addUser" style="display:none;width: 60%;
+    margin: auto;
+    padding: 1rem 2rem 4rem 2rem;">
+		
+	
+
+
+			<!-- <div style="padding: 10px;
+    background: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 95%, rgba(155, 155, 155, 0.22) 100%) 0% 0% transparent;
+    border: 1px solid #E8E8E8;">
+				<div style="display: flex; padding: 10px;">
+					<label class="labelQ" style="align-self: center;">Employee
+						ID :</label>
+					<div style="padding-left: 10px;">
+						<input type="number" id="empA" min="1" 
+							style="width: 100px; height: 28px; text-align: center; font-size: 16px;">
+					</div>
+
+				</div>
+				<div style="display: flex; padding: 10px;">
+					<label class="labelQ" style="align-self: center;">Name of the Dependent or Self :</label>
+					<div style="padding-left: 20px;">
+					<input type="text" id="nameA" 
+							style=" text-align: center; font-size: 16px;padding:2px;width:20em;">
+						
+					</div>
+				</div>
+				
+				<div style="display: flex; padding: 10px;">
+					<label class="labelQ" style="align-self: center;">Relationship :</label>
+					<div style="padding-left: 20px;">
+					<select id="relA"></select>
+						
+					</div>
+				</div>
+				<div style="display: flex; padding: 10px;">
+					<label class="labelQ" style="align-self: center;">Cowin Beneficiary ID :</label>
+					<div style="padding-left: 20px;">
+					<input type="text" id="cowinA" 
+							style=" text-align: center; font-size: 16px;padding:2px;width:20em;">
+						
+					</div>
+				</div>
+
+			</div> -->
+
+
+		</div>
+
+
+
+<!-- upload modal -->
+<div id="uploadmodal" class="uploadmodal">
+
+						  <!-- Modal content -->
+						  <div class="modal-content">
+						    <span class="close" id="closemodal" onclick="closeuploadmodal()">&times;</span>
+						    <div id="modalvalue" style="margin-top:10px">
+						    <form id="schedulefileupload"
+                    			>
+                    		<!-- action="/VaccinationTracker/uploadschedule"
+                    				method="POST" enctype="multipart/form-data" -->
+						    <input type="file" id="filedata" name ="filedata"/>
+						    </form>
+						    </div>
+						    <div style="align-items:center;margin-top:2%;text-align:center;">
+						     <button class="button-primary" id="uploadbutton" onclick="ScheduleUpload()">Upload</button>
+						      <button style="padding-left:5px;display:none;" class="button-primary" id="errorbutton" onclick="downloadErrorreport()">Download Error Report</button>
+						     </div>
+						  </div>
+
+						</div>
+
+	<!-- Modal -->
+	<div class="modale" style="display:none;"aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-header">
+				<h2 class="modal_header"></h2>
+				<a href="#" class="btn-close closemodale" aria-hidden="true">&times;</a>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+	<!-- /Modal -->
+
+
+		<p class="openModal" style="display:none;">
+		<a href="#" class="pop pop-big openmodale"></a>
+		</p>
+
+
+
+<button onclick="downloadReport()"  id="dwnReportID" hidden="true">Download Report</button>
+<form id="downloadreport" method="post" action="/VaccinationTracker/downloadreport">
+<input type="hidden" name="empid"  id="formInp" value="">
+</form>
+
+<form id="CvcReport" method="post" action="/VaccinationTracker/CVCDownload" ></form>
+
+<form id="reconReport" method="post" action="/VaccinationTracker/reconReportDownload" ></form>
+<form id="turnoutReport" method="post" action="/VaccinationTracker/turnoutReportDownload" ></form>
+<form id="trendReport" method="post" action="/VaccinationTracker/trendReportDownload" ></form>
+<form id="downloadErrorReport" method="post" action="/VaccinationTracker/errorReportDownload" ></form>
+
+</body>
+<script src="/VaccinationTracker/js/homepage.js"></script>
+ <script src="/VaccinationTracker/js/core.js"></script>
+<script src="/VaccinationTracker/js/charts.js"></script>
+<script src="/VaccinationTracker/js/themes/animated.js"></script>
+
+
+</html>

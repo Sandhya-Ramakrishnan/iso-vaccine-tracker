@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard</title>
+      <!-- <link rel="stylesheet" href="/VaccinationTracker/css/homepage.css"> -->
+  <script src="/VaccinationTracker/js/jquery3.6.0min.js"></script>
+ <!--  <script src="/VaccinationTracker/js/sweetalert.min.js"></script>
+  <style src="/VaccinationTracker/css/sweetalert.min.css"></style> -->
+      <style>
+* {
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+@media only screen and (max-width: 500px) {
+   .cardsContainer{
+    flex-direction:column !important;
+	
+   }
+   
+   
+   .card_dash{
+	width:80% !important;
+       align-self: center;
+	   margin:10px;
+   }
+   .row2Container{
+    flex-direction:column !important;
+   }
+   
+   
+   .tknDiv{
+       margin: 0 2.5rem 1rem 2.5rem;
+   }
+   #lbltknCount{
+   font-size:1em !important;
+   }
+   .row2div2{
+	width:100% !important;
+  }
+  
+  .vaccine_div{
+	width:100%!important;
+  }
+  .modal-content{
+  
+  width:70% !important;
+  }
+   
+   } 
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top:-19px
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dashboardContainer {
+	width: 100%
+}
+
+.cardsContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 0rem 0rem 0.8rem 0rem;
+}
+
+.card_dash {
+	width: 30%;
+	background: #f0f8ffbf;
+	border-radius: 10px;
+	border: 1px solid #131d92;
+	overflow: hidden;
+	cursor:pointer;
+}
+.card{
+	width: 30%;
+	background: #f0f8ffbf;
+	border-radius: 10px;
+	border: 1px solid #131d92;
+	overflow: hidden;
+	z-index:2;
+}
+.card_dash:hover {
+	-ms-transform: scale(1.1, 1.1);
+	/* IE 9 */
+	-webkit-transform: scale(1.1, 1.1);
+	/* Safari 3-8 */
+	transform: scale(1.1, 1.1);
+}
+
+.spanVal {
+	font-weight: bold;
+	font-size: 1.6rem;
+	align-self: center;
+}
+
+.pheader {
+	font-weight: bold;
+	font-size: 1.1rem;
+	height: 10px;
+	text-align: center;
+}
+
+.psubHeaders {
+	color: white;
+	white-space: nowrap;
+	font-size: 15px;
+}
+
+.spanSVal {
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 1.3rem;
+	margin: 0;
+	padding: 6px;
+}
+
+.subheadersGap {
+	display: flex;
+	justify-content: space-between;
+	background: #131d92;
+	padding: 0px 6px;
+}
+
+.liveDashboard {
+	border: 1px solid #1c29c7;
+	width: 100%;
+	border-radius: 6px;
+}
+
+.tableContainer {
+	background: white;
+	text-align: -webkit-center;
+}
+
+.liveDashboard th {
+	border-bottom: 2px solid #f1ca0a;
+	line-height: 40px;
+	background: #eceaeaad;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.liveDashboard tbody tr:nth-child(even) {
+	background: #f0f5f9;
+}
+
+.liveDashboard td {
+	border-bottom: 1.5px solid #ded9d9e0;
+	line-height: 40px;
+	text-align: center;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.liveDashboard tr:last-child td {
+	border: none
+}
+
+.liveDashboard td:nth-child(1) {
+	width: 60%;
+}
+
+.theaderInfo {
+	display: flex;
+	width: 60%;
+	justify-content: space-between;
+}
+
+.theaderInfo p:nth-child(2) {
+	font-weight: bold
+}
+
+.card_1div {
+	display: flex;
+	justify-content: center;
+}
+
+.card_1div_2 {
+	align-self: center;
+	border-radius: 50%;
+	background: #131d92;
+	margin-left: 12px;
+}
+
+.row2Container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.tknDiv {
+	border: 1px solid #131d92;
+	border-radius: 6px;
+	padding: 3rem;
+	display: flex;
+	flex-direction: column;
+	background: #f0f8ffbf;
+}
+
+.tknDiv_Round {
+	border: 0.3rem solid #121e9c;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    overflow: hidden;
+    align-self: center;
+    padding: 6px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.tknDiv_count {
+	font-weight: bold;
+    font-size: 2rem;
+    margin: auto;
+    padding: 10px;
+    color: orange;
+    position: absolute;
+    display: flex;
+    top: 15%;
+}
+
+.vaccine_div {
+	width: 50%;
+	background: #131d92;
+	display: flex;
+	justify-content: space-evenly;
+	border-radius: 6px;
+}
+
+.vaccine_div_count {
+	color: orange;
+	font-weight: bold;
+	font-size: 2rem;
+	margin: auto;
+	padding: 6px;
+}
+
+.vaccine_div_lbl {
+	color: white;
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin: auto;
+	padding: 6px;
+}
+
+.himg {
+	background: url('/VaccinationTracker/images/supervisor_account.svg')
+}
+
+
+/* Modal */
+.modalSec {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modalInner {
+    background: transparent linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 90%, #9b9b9b38  100%) 0% 0%;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modalTitle {
+    color: #26335E;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+}
+
+.modalInputs {
+    margin-bottom: 1.5rem;
+}
+
+.modalItem {
+    margin-bottom: 0.5rem;
+}
+
+.modalItem > input,.modalItem > select {
+    box-shadow: 0px 3px 6px #44444414;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    outline: none;
+    padding: 0.4rem 0.8rem;
+    min-width: 23rem;
+ }
+ 
+ .button-primary {
+    background: #06B4FE 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: #06b4fe98 0px 5px 27px -5px, #06b4fe96 0px 8px 16px -8px;
+}
+ 
+ .lOut{
+	 padding: 5px 12px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #131d92;
+    color: #131d92;
+    font-weight: 600;
+    }
+ 
+ .lOut:hover{
+ background: #131d92;
+  color: snow;
+ }
+</style>
+</head>
+
+<body>
+
+
+	 <div class="modalSec">
+        <div class="modalInner">
+            <h3 class="modalTitle">Covid Vaccination Drive - Live Dashboard</h3>
+            <div class="modalInputs">
+             <div class="modalItem">
+                    <p>Employee ID</p>
+                    <input type="text" id="empid">
+                </div>
+              <!--   <div class="modalItem">
+                    <p>Country</p>
+                    <select id="country">
+                    
+                    </select>
+                </div>
+                <div class="modalItem">
+                    <p>State</p>
+                    <select id="state">
+                    
+                    </select>
+                </div>  -->
+                <div class="modalItem">
+                    <p id="superlocation">Location</p>
+                    <select id="location">
+                    
+                    </select>
+                </div>
+            </div>
+            <button class="button-primary" onclick="checkEmp()" id="checkEmp">Continue</button>
+        </div>
+    </div>
+
+    <div class="dashboardContainer" style="display:none">
+
+	<div style="    display: flex;
+    justify-content: space-between;
+    width: 100%;">
+		<div style="display: flex; text-indent: 20px;">
+			<p>Location :</p>
+			<select id="dpLocation" onchange="reloadLocation(this)" style="align-self: center;padding: 0.3rem;border-radius: 8px;margin-left: 5px;"></select>
+			<p id="superdatetag"> Date: </p>
+    <input id="superDate" onchange="reloadLocation(this)" style="height: 27px; border-radius: 7px; align-self:center; border: 1.5px solid black; margin-left: 10px; outline: none;" type="date">
+		</div>
+		<div style="align-self: center;
+    text-indent: -5em;"> 
+    <button class="lOut">Logout</button></div>
+		</div>
+
+		<div class="cardsContainer">
+            <div class="card_dash"onclick="onclickdashboardcard('TCS')">
+               <div class="card_1div">
+                    <div style="display: flex;
+    flex-direction: column;padding: 6px 0px;">
+                        <span class="spanVal" id="hval1ID0">-</span>
+                        <p class="pheader" id="hlbl1ID0">TCS</p>
+                    </div>
+                    <div class="card_1div_2">
+						<svg width="40" height="38" viewBox="0 0 44 44" style="padding:2px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M30.2501 22.0001C32.7801 22.0001 34.8151 19.9467 34.8151 17.4167C34.8151 14.8867 32.7801 12.8334 30.2501 12.8334C27.7201 12.8334 25.6667 14.8867 25.6667 17.4167C25.6667 19.9467 27.7201 22.0001 30.2501 22.0001ZM16.5001 20.1667C19.5434 20.1667 21.9817 17.7101 21.9817 14.6667C21.9817 11.6234 19.5434 9.16675 16.5001 9.16675C13.4567 9.16675 11.0001 11.6234 11.0001 14.6667C11.0001 17.7101 13.4567 20.1667 16.5001 20.1667ZM30.2501 25.6667C26.8951 25.6667 20.1667 27.3534 20.1667 30.7084V34.8334H40.3334V30.7084C40.3334 27.3534 33.6051 25.6667 30.2501 25.6667ZM16.5001 23.8334C12.2284 23.8334 3.66675 25.9784 3.66675 30.2501V34.8334H16.5001V30.7084C16.5001 29.1501 17.1051 26.4184 20.8451 24.3467C19.2501 24.0167 17.7101 23.8334 16.5001 23.8334Z" fill="#FFA000"/>
+</svg>
+						
+					</div>
+                </div>
+                <div class="subheadersGap">
+                    <div>
+                        <p class="psubHeaders" id="slbl1ID0">Cowin Verified</p>
+                        <p class="spanSVal" id="sval1ID0">-</p>
+                    </div>
+                    <div>
+                        <p class="psubHeaders" id="slbl2ID0">Dose 1 Vaccinated</p>
+                        <p class="spanSVal" id="sval2ID0">-</p>
+                    </div>
+                  <!--   <div>
+                        <p class="psubHeaders" id="slbl3ID0">Post Exit Vaccinated</p>
+                        <p class="spanSVal" id="sval3ID0">-</p>
+                    </div> -->
+                </div>
+            </div>
+
+
+            <div class="card_dash"onclick="onclickdashboardcard('Non-TCS')">
+                     <div class="card_1div">
+                  <div style="display: flex;
+    flex-direction: column;padding: 6px 0px;">
+                        <span class="spanVal" id="hval1ID1">-</span>
+                        <p class="pheader" id="hlbl1ID1">TCS</p>
+                    </div>
+                    <div class="card_1div_2">
+                         	<svg width="40" height="38" viewBox="0 0 44 44" style="padding:2px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M30.2501 22.0001C32.7801 22.0001 34.8151 19.9467 34.8151 17.4167C34.8151 14.8867 32.7801 12.8334 30.2501 12.8334C27.7201 12.8334 25.6667 14.8867 25.6667 17.4167C25.6667 19.9467 27.7201 22.0001 30.2501 22.0001ZM16.5001 20.1667C19.5434 20.1667 21.9817 17.7101 21.9817 14.6667C21.9817 11.6234 19.5434 9.16675 16.5001 9.16675C13.4567 9.16675 11.0001 11.6234 11.0001 14.6667C11.0001 17.7101 13.4567 20.1667 16.5001 20.1667ZM30.2501 25.6667C26.8951 25.6667 20.1667 27.3534 20.1667 30.7084V34.8334H40.3334V30.7084C40.3334 27.3534 33.6051 25.6667 30.2501 25.6667ZM16.5001 23.8334C12.2284 23.8334 3.66675 25.9784 3.66675 30.2501V34.8334H16.5001V30.7084C16.5001 29.1501 17.1051 26.4184 20.8451 24.3467C19.2501 24.0167 17.7101 23.8334 16.5001 23.8334Z" fill="#FFA000"/>
+</svg>
+                    </div>
+                </div>
+                <div class="subheadersGap">
+                    <div>
+                        <p class="psubHeaders" id="slbl1ID1">Cowin Verified</p>
+                        <p class="spanSVal" id="sval1ID1">-</p>
+                    </div>
+                    <div>
+                        <p class="psubHeaders" id="slbl2ID1">Dose 1 Vaccinated</p>
+                        <p class="spanSVal" id="sval2ID1">-</p>
+                    </div>
+                   <!--  <div>
+                        <p class="psubHeaders" id="slbl3ID1">Post Exit Vaccinated</p>
+                        <p class="spanSVal" id="sval3ID1">-</p>
+                    </div> -->
+                </div>
+            </div>
+
+
+
+            <div class="card_dash"onclick="onclickdashboardcard('vendor')">
+                     <div class="card_1div">
+            <div style="display: flex;
+    flex-direction: column;padding: 6px 0px;">
+                        <span class="spanVal" id="hval1ID2">-</span>
+                        <p class="pheader" id="hlbl1ID2">TCs</p>
+                    </div>
+                    <div class="card_1div_2">
+                         <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M30.2501 22.0001C32.7801 22.0001 34.8151 19.9467 34.8151 17.4167C34.8151 14.8867 32.7801 12.8334 30.2501 12.8334C27.7201 12.8334 25.6667 14.8867 25.6667 17.4167C25.6667 19.9467 27.7201 22.0001 30.2501 22.0001ZM16.5001 20.1667C19.5434 20.1667 21.9817 17.7101 21.9817 14.6667C21.9817 11.6234 19.5434 9.16675 16.5001 9.16675C13.4567 9.16675 11.0001 11.6234 11.0001 14.6667C11.0001 17.7101 13.4567 20.1667 16.5001 20.1667ZM30.2501 25.6667C26.8951 25.6667 20.1667 27.3534 20.1667 30.7084V34.8334H40.3334V30.7084C40.3334 27.3534 33.6051 25.6667 30.2501 25.6667ZM16.5001 23.8334C12.2284 23.8334 3.66675 25.9784 3.66675 30.2501V34.8334H16.5001V30.7084C16.5001 29.1501 17.1051 26.4184 20.8451 24.3467C19.2501 24.0167 17.7101 23.8334 16.5001 23.8334Z" fill="#FFA000"/>
+</svg>
+                    </div>
+                </div>
+                <div class="subheadersGap">
+                    <div>
+                        <p class="psubHeaders" id="slbl1ID2">Cowin Verified</p>
+                        <p class="spanSVal" id="sval1ID2">-</p>
+                    </div>
+                    <div>
+                        <p class="psubHeaders" id="slbl2ID2">Dose 1 Vaccinated</p>
+                        <p class="spanSVal" id="sval2ID2">-</p>
+                    </div>
+                  <!--   <div>
+                        <p class="psubHeaders" id="slbl3ID2">Post Exit Vaccinated</p>
+                        <p class="spanSVal" id="sval3ID2">-</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row2Container">
+            <div>
+                <div class="tknDiv">
+                    <div class="tknDiv_Round">
+                        <p class="tknDiv_count">-</p>
+                    </div>
+                    <p style="
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                " id="lbltknCount">Total Token Generated</p>
+                </div>
+            </div>
+            <div class="row2div2" style="width:60%;align-self: center;">
+
+
+                <div class="tableContainer">
+
+                   
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <br>
+        <div style="width: 100%;
+        text-align: -webkit-center;">
+            <div class="vaccine_div">
+            <div>
+                <p  class="vaccine_div_count vac_count0ID">-</p>
+                <p  class="vaccine_div_lbl vac_lbl0ID">Covidshield</p>
+            </div>
+            <div>
+                <p  class="vaccine_div_count vac_count1ID">-</p>
+                <p class="vaccine_div_lbl vac_lbl1ID">-</p>
+            </div>
+              <div>
+                <p  class="vaccine_div_count vac_count2ID">-</p>
+                <p  class="vaccine_div_lbl vac_lbl2ID">Covaxin</p>
+            </div>
+        </div> 
+        </div>
+
+
+    </div>
+    <div id="onclickdbdmodal" class="modal">
+
+						  <!-- Modal content -->
+						  <div class="modal-content">
+						    <span class="close" id="closemodal">&times;</span>
+						    <div id="modalvalue" style="margin-top:10px"></div>
+						  </div>
+
+						</div>
+</body>
+    
+
+<script>
+var superuser="";
+$(document).ready(function() {
+	console.log("dashboard")
+	//getvaccinationLocation()
+	/* $("#location").hide();
+	$("#superlocation").hide(); */
+    	
+	$('#empid, #location, #state, #country').keypress(function(e) {
+		    var key = e.which;
+		    if (key == 13) // the enter key code
+		    {
+		    	 $('#checkEmp').click()
+		      return false;
+		    }
+		  });
+	 $("#empid").focusout(function(){
+		 if($("#empid").val().trim()!==""){
+		 getvaccinationLocation($("#empid").val())
+		 }
+		}); 
+	setInterval(function() {
+		getCardsData();
+		getLiveDashboardData();
+		}, 60 * 2000);
+	
+	
+	$('.lOut').on('click',(e)=>{
+		localStorage.removeItem('emp');
+		//localStorage.removeItem('country');
+		//localStorage.removeItem('state');
+		localStorage.removeItem('location');
+		localStorage.removeItem('log');
+		localStorage.removeItem('day');
+		localStorage.removeItem('time');
+		location.reload();	
+	})
+	reloadlcredentials();
+	});
+
+function reloadLocation(){
+	$("#location").val($("#dpLocation").val())
+	checkEmp();
+}
+
+/* function getLiveDashboardData(){
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/getLiveDashBoardData", 
+					type : "POST",
+					async:true,
+					data : {
+					 
+					},
+					success: function(data)
+					{
+						console.log(data)
+						
+						if(data!=""){
+							
+							var hdr=data[0]
+							var val=data[1]
+							
+						var html='<div class="theaderInfo"> <p>'+data[2][0][0]+'</p> <p>'+data[2][0][1]+'</p> </div><table class="liveDashboard"><thead style="text-align: left;"><tr>'	
+						
+						
+						
+						
+						for(var i=0;i<hdr[0].length;i++){
+							html+='<th>'+hdr[0][i]+'</th>'
+						}
+						
+						html+='</tr></thead><tbody>'
+						
+							for(var i=0;i<val.length;i++){
+								html+='<tr>'
+								for(var j=0;j<val[i].length;j++){
+									html+='<td>'+val[i][j]+'</td>'
+								}
+								html+='</tr>'
+							}
+						html+='</tbody></table>'
+						
+						$(".tableContainer").html(html)
+						}
+						
+					},
+					error: function(err)
+					{
+						alert("sorry error occured");
+					}
+				})
+} */
+
+
+
+/* function getCardsData(){
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/getCardsData", 
+					type : "POST",
+					async:true,
+					data : {
+					 
+					},
+					success: function(data)
+					{
+						console.log(data)
+						
+						if(data!=""){
+							
+							
+							
+							var arr=[]
+							console.log(data[0].length)
+							console.log(data.length)
+							for(var i=0;i<data[0].length;i++){
+								var html=''
+								html+='<div class="card_dash"><div style="display: flex;">'
+								html+='<div style="align-self: center;"><img src="/VaccinationTracker/images/arrow.png" width="35"></div>'
+								html+='<div style=" padding: 0px 15px;"> <p class="pheader">'+data[0][i][0]+'</p> <span class="spanVal">'+data[1][i][0]+'</span> </div></div>'
+								html+='<div class="subheadersGap">'
+								html+='<div> <p class="psubHeaders">'+data[0][i][1]+'</p> <span class="spanSVal">'+data[1][i][1]+'</span></div>'
+								html+='<div> <p class="psubHeaders">'+data[0][i][2]+'</p> <span class="spanSVal">'+data[1][i][2]+'</span> </div>'
+								html+='<div> <p class="psubHeaders">'+data[0][i][3]+'</p> <span class="spanSVal">'+data[1][i][3]+'</span> </div></div>'
+								html+='</div>'
+								
+								arr.push(html)
+							}
+							
+							$(".cardsContainer").html(arr.join(""))
+						}
+						
+					},
+					error: function(err)
+					{
+						alert("sorry error occured");
+					}
+				})
+} */
+function getLiveDashboardData(){
+	
+//	var spoc =$("#empid").val()+","+$("#country").val()+","+$("#state").val()+","+$("#location").val()
+	var spoc =$("#empid").val()+","+$("#location").val()+","+$("#superDate").val()
+	var date =$("#superDate").val()
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/getLiveDashBoardData", 
+					type : "POST",
+					async:true,
+					data : {
+					 flag:spoc,
+					 maxDate:date
+					},
+					success: function(data)
+					{
+						console.log(data)
+						
+						if(data!=""){
+							
+							var hdr=data[0]
+							var val=data[1]
+							
+						var html='<table class="liveDashboard"><thead style=""><tr>'	
+						
+						
+						
+						for(var i=0;i<hdr[0].length;i++){
+							html+='<th>'+hdr[0][i]+'</th>'
+						}
+						
+						
+						html+='</tr></thead><tbody>'
+						
+							for(var i=0;i<val.length;i++){
+								html+='<tr>'
+								for(var j=0;j<val[i].length;j++){
+									html+='<td>'+val[i][j]+'</td>'
+								}
+								html+='</tr>'
+							}
+						html+='</tbody></table>'
+						
+						$(".tableContainer").html(html)
+						
+						$(".tknDiv_count").text(data[2][0][1])
+						$("#lbltknCount").text(data[2][0][0])
+						
+						$(".vac_count0ID").text(data[2][1][1])
+						$(".vac_lbl0ID").text(data[2][1][0])
+						
+						$(".vac_count1ID").text(data[2][2][1])
+						$(".vac_lbl1ID").text(data[2][2][0])
+						
+						$(".vac_count2ID").text(data[2][3][1])
+						$(".vac_lbl2ID").text(data[2][3][0])
+						
+						}
+						
+					},
+					error: function(err)
+					{
+						alert("sorry error occured");
+					}
+				})
+}
+
+
+
+function getCardsData(){
+	
+	var spoc =$("#empid").val()+","+$("#location").val()+","+$("#superDate").val()
+	var date =$("#superDate").val()
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/getCardsData", 
+					type : "POST",
+					async:true,
+					data : {
+					 flag:spoc,
+					 maxDate:date,
+					},
+					success: function(data)
+					{
+						console.log(data)
+						
+						if(data!=""){
+							
+							
+							
+							console.log("data1",data[0].length)
+							console.log("data",data.length)
+							for(var i=0;i<data[0].length;i++){
+								
+								$(`#hval1ID${i}`).text(data[1][i][0])
+								$(`#hlbl1ID${i}`).text(data[0][i][0])
+								
+								$(`#slbl0ID${i}`).text(data[0][i][1])
+								$(`#sval1ID${i}`).text(data[1][i][1])
+								
+								$(`#slbl1ID${i}`).text(data[0][i][2])
+								$(`#sval2ID${i}`).text(data[1][i][2])
+								
+								$(`#slbl2ID${i}`).text(data[0][i][3])
+								$(`#sval3ID${i}`).text(data[1][i][3])
+							}
+							
+						}
+						
+					},
+					error: function(err)
+					{
+						alert("sorry error occured");
+					}
+				})
+}
+
+
+function getvaccinationLocation(){
+
+	var emp = $("#empid").val() !=null ? $("#empid").val().trim() : ""
+	
+	$.ajax(
+			{
+				url: "/VaccinationTracker/getDasboardAccess", 
+				type : "POST",
+				data : {
+				 empid:emp
+				},
+				success: function(data)
+				{
+					
+					console.log(data)
+					superuser=data.flag2.trim();
+					if(data.flag2.trim()=="Y"){
+						 $("#superDate").val(data.maxDate);
+						/* $("#location").hide();
+						$("#superlocation").hide(); */
+					}else if(data.flag2.trim()=="N"){
+						$("#location").show();
+						$("#superlocation").show();
+					}
+					
+					if(data.list3!=""){
+						
+						//var ids=["country","state","location"]				
+						var ids=["location"]				
+						for(var i=0;i<data.list3.length;i++){
+							var html='<select><option value data-isdefault="true">--Select--</option>'
+							for(var j=0;j<data.list3[i].length;j++){
+								html+='<option value="'+data.list3[i][j][0]+'">'+data.list3[i][j][0]+'</option>'
+							}
+							html+='</select>'
+						   $(`#${ids[i]}`).html(html)
+						  $("#dpLocation").html(html)
+						}
+						reldrop=data[3]
+						vacTyDrop=data[4]
+						
+						
+						/* if (typeof(Storage) !== "undefined") {
+				    		if(localStorage.getItem("log")!==null){
+				    			
+				    			
+				    			
+				    			if(localStorage.getItem("day")==new Date().getDay()+1){
+				    				if(new Date().getHours()-localStorage.getItem("time")>3){
+				    					localStorage.removeItem('emp');
+				    					//localStorage.removeItem('country');
+				    					//localStorage.removeItem('state');
+				    					localStorage.removeItem('location');
+				    					localStorage.removeItem('log');
+				    					localStorage.removeItem('day');
+				    					localStorage.removeItem('time');
+				    				}
+				    				else{
+				    					$("#empid").val(localStorage.getItem("emp"))
+						    			//$("#country").val(localStorage.getItem("country"))
+						    			//$("#state").val(localStorage.getItem("state"))
+						    			$("#location").val(localStorage.getItem("location"))
+						    			//$("#hospital").val(localStorage.getItem("hosiptal"))
+						    			$("#checkEmp").click()
+				    				}
+				    			}
+				    			else{
+				    				localStorage.removeItem('emp');
+			    				//	localStorage.removeItem('country');
+			    					//localStorage.removeItem('state');
+			    					localStorage.removeItem('location');
+			    					localStorage.removeItem('log');
+			    					localStorage.removeItem('day');
+			    					localStorage.removeItem('time');
+				    			}
+				    			
+				    		}
+				    		} else {
+				    		   console.warn("Sorry, your browser does not support Web Storage...");
+				    		}
+						
+						 */
+					}
+					else {
+						alert("Exception occurred,failed to load dropdowns")
+					}
+					
+					
+				},
+				error: function(err)
+				{
+					alert("sorry error occured");
+				}
+			})
+
+}
+function reloadlcredentials(){
+	
+	if (typeof(Storage) !== "undefined") {
+		if(localStorage.getItem("log")!==null){
+			
+			
+			
+			if(localStorage.getItem("day")==new Date().getDay()+1){
+				if(new Date().getHours()-localStorage.getItem("time")>3){
+					localStorage.removeItem('emp');
+					//localStorage.removeItem('country');
+					//localStorage.removeItem('state');
+					localStorage.removeItem('location');
+					localStorage.removeItem('log');
+					localStorage.removeItem('day');
+					localStorage.removeItem('time');
+				}
+				else{
+					
+					$("#empid").val(localStorage.getItem("emp"))
+					getvaccinationLocation();
+	    			//$("#country").val(localStorage.getItem("country"))
+	    			//$("#state").val(localStorage.getItem("state"))
+	    			
+	    			//$("#hospital").val(localStorage.getItem("hosiptal"))
+	    			setTimeout(function(){
+	    				$("#location").val(localStorage.getItem("location"))
+	    			$("#checkEmp").click()
+	    			},1000)
+				}
+			}
+			else{
+				localStorage.removeItem('emp');
+			//	localStorage.removeItem('country');
+				//localStorage.removeItem('state');
+				localStorage.removeItem('location');
+				localStorage.removeItem('log');
+				localStorage.removeItem('day');
+				localStorage.removeItem('time');
+			}
+			
+		}
+		} else {
+		   console.warn("Sorry, your browser does not support Web Storage...");
+		}
+
+}
+function onclickdashboardcard(type){
+	//debugger;
+	var spoc =$("#empid").val()+","+$("#country").val()+","+$("#state").val()+","+$("#location").val()+","+$("#superDate").val()
+	var buttonhtml="";
+	var content="";
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/onclickdashboardcard", 
+					type : "POST",
+					data : {
+					
+					 flag:spoc,
+					 input:type
+					},
+					success:function(data){
+						if(data==""){
+							alert("no data available");
+							return;
+						}
+						console.log(data);
+						$("#onclickdbdmodal").css("display","block");
+						content+="<img src='/VaccinationTracker/images/isoOlogo.png' style='display: block; float: left;margin-top: -12px'><div style='text-align: center;font-size:large;font-weight: bold;background-color: darkblue;color: white;padding: 9px;margin-top: -30px;margin-left: -20px;margin-right: -20px'>"+type+"</div>"
+						content+="<table id='onclicktable' style='border: 1px solid #1c29c7;width: 100%;border-radius: 6px;margin-top:25px'>"
+						
+						for(let i=0;i<data[0].length;i++){
+						
+						content+="<tr><td style='border-right: 1px solid #dddddd;border-bottom: 1px solid #dddddd;text-align: left;width:auto'>"+data[0][i][0]+"</td>";
+						content+="<td style='border-right: 1px solid #dddddd;border-bottom: 1px solid #dddddd;text-align: center;width: 60px;padding:6px 10px;'>"+data[0][i][1]+"</td></tr>";
+						}
+						
+						content+="</table>";
+						$("#modalvalue").html(content);
+						$("#onclicktable >tbody >tr:last-child ").css("font-weight","bold");
+					    $("#closemodal").on("click",function(){
+					    	$("#onclickdbdmodal").css("display","none");
+					    	
+					    	});  
+					     
+						
+					 },
+					error:function(err)
+					{
+										alert("sorry error occured");
+									}
+				})
+				
+}
+
+function checkEmp(){
+	
+			var emp = $("#empid").val() !=null ? $("#empid").val().trim() : ""
+		  // var cntry = $("#country").val() !=null ? $("#country").val().trim() : ""
+		 //  var state = $("#state").val() !=null ? $("#state").val().trim() : ""
+		   var loc = $("#location").val() !=null ? $("#location").val().trim() : ""
+			   var date = $("#superDate").val() !=null ? $("#superDate").val().trim() : ""
+
+	if(emp=="") {alert("Employee Id cannot be empty");return}
+	//if(cntry=="") {alert("Country cannot be empty");return}
+	//if(state=="") {alert("State cannot be empty");return}
+	
+	if(loc=="") {alert("Location cannot be empty");return}
+	
+	
+	 $.ajax(
+				{
+					url: "/VaccinationTracker/getDasboardAccess", 
+					type : "POST",
+					data : {
+					 empid:emp,
+					 flag:"Dashboard"
+					},
+					success: function(data)
+					{
+						console.log(data)
+						if(data.flag1.trim()=="N"){
+							alert("Your Employee id is not registered as volunteer")
+							$(".dashboardContainer").hide()
+							return;
+							}
+						else if(data.flag1.trim()=="Y"){
+							//window.location.pathname+="Search"
+							$(".modalSec").hide()
+							$(".dashboardContainer").show()
+							getCardsData();
+							getLiveDashboardData();
+							$("#dpLocation").val(loc)
+							
+							 if(data.flag2.trim()=="Y"){
+								/*  $("#dpLocation").val(data.list3[0][0][0])	  */
+								 $("#superdatetag").show();
+								 $("#superDate").show();
+								 $("#superDate").val(date);
+								/*  $("#superDate").val(data.maxDate) */
+								 $("#dpLocation").val(loc)
+							 }else if(data.flag2.trim()=="N"){
+								 $("#dpLocation").val(loc)
+								 $("#superdatetag").hide();
+								 $("#superDate").hide();
+							 }
+							
+							
+							if (typeof(Storage) !== "undefined") {
+									if(localStorage.getItem("log")==null){
+										
+										 localStorage.setItem("emp", emp);
+							    		//  localStorage.setItem("country", cntry);
+							    		//  localStorage.setItem("state", state);
+							    		  localStorage.setItem("location", loc);
+							    		 // localStorage.setItem("hosiptal", hos);
+							    		  localStorage.setItem("log", "1");
+							    		  localStorage.setItem("day", new Date().getDay()+1);
+							    		  localStorage.setItem("time", new Date().getHours());
+									}
+						    		} else {
+						    		 console.warn("Sorry, your browser does not support Web Storage...")
+						    		}
+				
+						}
+					},
+					error: function(err)
+					{
+						alert("sorry error occured");
+					}
+				})
+	
+}
+</script>
+
+</html>
