@@ -66,9 +66,9 @@ var accessArr =[]
     	
     	
     		$(".searchFlagHandler li").click(function(e){
-    			console.log(e)
-    			console.log($(e))
-    			console.log(document.getElementById("searchFlagLabel").innerText =e.target.innerText)
+    			//console.log(e)
+    			//console.log($(e))
+    			//console.log(document.getElementById("searchFlagLabel").innerText =e.target.innerText)
     			$("#srchFlag").val(e.target.id)
     			
     			if(accessArr[0].includes("T")){
